@@ -10,10 +10,10 @@ getProduct :: String -> Int
 getProduct line = product $ elems maxCubes
     where
         games = concatMap (splitOn ", ") $ splitOn "; " $ tail $ dropWhile (/=':') line
-        maxCubes = foldl (unionWith max) empty $ map getMaxCubes games
+        maxCubes = foldl (unionWith max) empty $ map getCubesMap games
 
-getMaxCubes :: String -> Map String Int
-getMaxCubes game = fromList [(color, count)]
+getCubesMap :: String -> Map String Int
+getCubesMap game = fromList [(color, count)]
     where
         color = last $ words game
         count = read $ last $ init $ words game
